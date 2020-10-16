@@ -1,0 +1,82 @@
+---
+title: "Build a model"
+output: html_notebook
+---
+This R Notebook document  shows how to build a model using the ##tidyverse## package  called ##parsnip##.  This is Craig Slinkman's implementation of the tidymodels that can be found [here](https://www.tidymodels.org/start/).  This package is part of the ##tidyverse##. 
+
+In this tutorial we will learn how to use the R package $parsnip$.
+
+# Build a model 
+
+How do you create a statistical model using tidymodels? In this article, we will walk you through the steps. We start with data for modeling, learn how to specify and train models with different engines using the parsnip package, and understand why these functions are designed this way.
+
+To use code in this tutorial, you will need to install the following packages: broom.mixed, readr, rstanarm, and tidymodels.  
+
+The Sea Urchins Data 🔗︎
+
+Let’s use the data from Constable (1993) to explore how three different feeding regimes affect the size of sea urchins over time. The initial size of the sea urchins at the beginning of the experiment probably affects how big they grow as they are fed.
+
+To start, let’s read our urchins data into R, which we’ll do by providing readr::read_csv() with a url where our CSV data is located (“https://tidymodels.org/start/models/urchins.csv”).
+
+## Loading packages
+
+```{r load packages}
+require( tidyverse )  # I live in the tidyverse...
+require( readr )      # Provides thr read_csv function to read csv data ...
+require( cowplot )    # For more professional graphics ...
+```
+
+
+## Read data
+
+We read the data below:
+
+```{r get_and_save_data}
+
+################################################################################
+# In this code chunk we
+#     1. Read the data,
+#     2. Change the names to be a little more verbose,
+#     3. Factors are very helpful for modeling, so we convert the character
+#       variable $food_regime$ to be a factor.
+################################################################################
+
+urchins <-  
+  read_csv( "https://tidymodels.org/start/models/urchins.csv" ) %>% 
+    setNames(c("food_regime", "initial_volume", "width")) %>% 
+      mutate(food_regime = factor( food_regime, 
+                                   levels = c("Initial", "Low", "High")))
+```
+
+Let's take a quick loo at the data:
+
+```{r display_tibble}
+urchins
+```
+
+The urchins data is a tibble. If you are new to tibbles, the best place to start is the tibbles chapter in R for Data Science. 
+
+For each of the 72 urchins, we know their:
+
+    * experimental feeding regime group (food_regime: either Initial, Low, or High),
+    
+    
+    * size in milliliters at the start of the experiment (initial_volume), and
+    
+    * suture width at the end of the experiment (width).
+
+As a first step in modeling, it’s always a good idea to plot the data (If you got it - plot it!):
+ 
+```{r plot_data}
+ggplot(urchins,
+       aes(x = initial_volume, 
+           y = width, 
+           group = food_regime, 
+           col = food_regime)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE) +
+  scale_color_viridis_d(option = "plasma", end = .7) +
+  theme_set( theme_cowplot())
+
+```
+
