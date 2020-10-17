@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+
+
+
+<link rel="stylesheet" href="Get%20Started%20-%20Build%20a%20model_files/fonts.css">
+<link rel="stylesheet" href="Get%20Started%20-%20Build%20a%20model_files/main-site.css">
+<link rel="stylesheet" href="Get%20Started%20-%20Build%20a%20model_files/fa5-all.css">
+<style type="text/css">
+    body {
+	background-color: #ffffff;
+	color: #404040
+}
+
+/* Links */
+
+a {
+  color: #CA225E;
+}
+
+a:hover {
+  color: #cc3168;
+}
+
+/* Landing page content bands */
+
+#homeContent .band.first {
+  background-color: #ffffff
+}
+
+#homeContent .band.second {
+  background-color: #fcfcfc
+}
+
+#homeContent .band.third {
+  background-color: #ffffff
+}
+
+/* Top navigation bar menu */
+
+#rStudioHeader {
+  background-color: #ffffff;
+  color: black;
+}
+
+#rStudioHeader .productName {
+  color: #CA225E
+}
+
+#rStudioHeader .productName:hover {
+  color: #00000075
+}
+
+#rStudioHeader #menu .menuItem.a {
+  background-color: #75aadb;
+  color: black;
+}
+
+#rStudioHeader #menu .menuItem:hover {
+  background-color: white;
+  color: #CA225E;
+}
+
+#rStudioHeader #menu .menuItem.current {
+  background-color: #fcfcfc;
+  color: #CA225E;
+  text-decoration: none;
+}
+
+/* Footer */
+
+#rStudioFooter.band {
+  background-color: #CA225E40;
+}
+
+#rStudioFooter .bandContent #copyright {
+  color: #CA225E;
+}
+
+/* Tables */
+
+table tbody tr:nth-child(even){
+  background-color: #fcfcfc;
+}
+
+table tbody tr:nth-child(odd){
+  background-color: #1a162d10;
+}
+
+.latest {
+  border-top: .5em solid <no value>;
+}
+</style>
+
+  <link rel="stylesheet" href="Get%20Started%20-%20Build%20a%20model_files/tm.css">
+
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="og:image" content="https://www.tidymodels.org/images/feature_summary_large_image.jpg">
+
+  <meta property="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://www.tidymodels.org/images/feature_summary_large_image.jpg"><meta name="generator" content="Hugo 0.65.0">
+
+<meta property="og:type" content="website"><title>Get Started - Build a model</title>
+    <meta property="og:title" content="Get Started - Build a model">
+    
+    
+    
+    
+    <meta property="description" content="Get started by learning how to specify and train a model using tidymodels.
+">
+    <meta property="og:description" content="Get started by learning how to specify and train a model using tidymodels.
+">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.tidymodels.org/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.tidymodels.org/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.tidymodels.org/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://www.tidymodels.org/images/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://www.tidymodels.org/images/favicons/safari-pinned-tab.svg">
+<link rel="shortcut icon" href="https://www.tidymodels.org/images/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" href="/images/favicons/browserconfig.xml">
+
+
+
+<script async="" src="Get%20Started%20-%20Build%20a%20model_files/analytics.js"></script><script type="text/javascript" src="Get%20Started%20-%20Build%20a%20model_files/jquery-3.js"></script>
+<script type="text/javascript" src="Get%20Started%20-%20Build%20a%20model_files/site.js"></script>
+
+
+  <script type="text/javascript" src="Get%20Started%20-%20Build%20a%20model_files/tm.js"></script>
+
+
+<link rel="icon" href="https://www.tidymodels.org/images/favicon.ico">
+
+
+
+<script src="Get%20Started%20-%20Build%20a%20model_files/bootstrap.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+
+<script src="Get%20Started%20-%20Build%20a%20model_files/clipboard.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+
+
+
+  <style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head><body><div id="MathJax_Message" style="display: none;"></div>
+    <div id="appTidyverseSite" class="shrinkHeader alwaysShrinkHeader">
+      <div id="main">
+        
+        <div id="rStudioHeader">
+          <div class="band">
+            <div class="innards bandContent">
+              <div>
+                <a class="productName" href="https://www.tidymodels.org/">Tidymodels</a>
+                
+              </div>
+              <div id="menu">
+  <div id="menuToggler"></div>
+  <div id="menuItems" class="">
+    
+    
+      
+      
+      
+    <a class="menuItem " href="https://www.tidymodels.org/packages/">Packages</a>
+    
+      
+      
+      
+    <a class="menuItem current" href="https://www.tidymodels.org/start/">Get Started</a>
+    
+      
+      
+      
+    <a class="menuItem " href="https://www.tidymodels.org/learn/">Learn</a>
+    
+      
+      
+      
+    <a class="menuItem " href="https://www.tidymodels.org/help/">Help</a>
+    
+      
+      
+      
+    <a class="menuItem " href="https://www.tidymodels.org/contribute/">Contribute</a>
+    
+      
+      
+      
+    <a class="menuItem " href="https://www.tidymodels.org/find/"><i class="fas fa-search fa-lg"></i> </a>
+    
+      
+      
+      
+    <a class="menuItem " href="https://github.com/tidymodels/"><i class="fab fa-github fa-lg"></i></a>
+    
+  </div>
+</div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+ 
+
+
+
+
+<div class="band padForHeader pushFooter">
+  <div class="bandContent">
+    <div class="full splitColumns withMobileMargins">
+
+      
+<div class="column25-left hideOnMobile">
+  <div class="section">
+    <div class="section">
+      <div class="start sectionTitle">
+          
+          <a class="sectionTitle " href="https://www.tidymodels.org/start/">
+          Get Started
+          
+          </a>
+      </div>
+    </div>
+  
+    <div class="section">
+        <div class="sectionTitle">1&nbsp;&nbsp;<a class="sectionTitle current" href="https://www.tidymodels.org/start/models/">Build a model</a>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="sectionTitle">2&nbsp;&nbsp;<a class="sectionTitle " href="https://www.tidymodels.org/start/recipes/">Preprocess your data with recipes</a>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="sectionTitle">3&nbsp;&nbsp;<a class="sectionTitle " href="https://www.tidymodels.org/start/resampling/">Evaluate your model with resampling</a>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="sectionTitle">4&nbsp;&nbsp;<a class="sectionTitle " href="https://www.tidymodels.org/start/tuning/">Tune model parameters</a>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="sectionTitle">5&nbsp;&nbsp;<a class="sectionTitle " href="https://www.tidymodels.org/start/case-study/">A predictive modeling case study</a>
+        </div>
+    </div>
+    
+  </div>
+  
+   
+  
+    <a class="help-link" href="https://www.tidymodels.org/help/"><div class="help"> Stuck? Confused? Ask for help. </div></a>
+
+  
+
+</div>
+
+      
+      <div class="column75">
+
+      <h1 class="article-title">1&nbsp;&nbsp;&nbsp;Build a model</h1>
+      
+      <div class="tags-list">
+      <i class="fas fa-box-open" style="color:#1a162dde;"></i>&nbsp;
+      <h1 class="learning-objective">Tidymodels packages: </h1>
+      
+        <a href="https://www.tidymodels.org/tags/broom/">broom</a>, 
+        <a href="https://www.tidymodels.org/tags/parsnip/">parsnip</a></div>
+        
+      <div class="section">
+        <div class="listItem learn-top-nav">
+          <div class="tutorial"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#data">The Sea Urchins Data</a></li>
+    <li><a href="#build-model">Build and fit a model</a></li>
+    <li><a href="#predict-model">Use a model to predict</a></li>
+    <li><a href="#new-engine">Model with a different engine</a></li>
+    <li><a href="#why">Why does it work that way?</a></li>
+    <li><a href="#session-info">Session information</a></li>
+  </ul>
+</nav></div>
+        </div>
+      </div>
+      
+      <div class="article-content">
+      <h2 id="intro">Introduction&nbsp;<a class="hanchor" arialabel="Anchor" href="#intro">🔗︎</a> </h2>
+<p>How do you create a statistical model using tidymodels? In this 
+article, we will walk you through the steps. We start with data for 
+modeling, learn how to specify and train models with different engines 
+using the <a href="https://tidymodels.github.io/parsnip/">parsnip package</a>, and understand why these functions are designed this way.</p>
+<p>To use code in this article,  you will need to install the following packages: broom.mixed, readr, rstanarm, and tidymodels.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">library</span>(tidymodels)  <span style="color:#408080;font-style:italic"># for the parsnip package, along with the rest of tidymodels</span>
+
+<span style="color:#408080;font-style:italic"># Helper packages</span>
+<span style="color:#00f">library</span>(readr)       <span style="color:#408080;font-style:italic"># for importing data</span>
+<span style="color:#00f">library</span>(broom.mixed) <span style="color:#408080;font-style:italic"># for converting bayesian models to tidy tibbles</span>
+</code></pre></div><p> Alternatively, open an interactive version of this article in your browser: </p>
+
+<a href="https://rstudio.cloud/project/1479888">
+  <button class="test-drive-btn"><i class="fa fa-cloud"></i> Test Drive on RStudio Cloud</button>
+</a>
+
+<h2 id="data">The Sea Urchins Data&nbsp;<a class="hanchor" arialabel="Anchor" href="#data">🔗︎</a> </h2>
+<p>Let’s use the data from <a href="https://link.springer.com/article/10.1007/BF00349318">Constable (1993)</a>
+ to explore how three different feeding regimes affect the size of sea 
+urchins over time. The initial size of the sea urchins at the beginning 
+of the experiment probably affects how big they grow as they are fed.</p>
+<p>To start, let’s read our urchins data into R, which we’ll do by providing <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a> with a url where our CSV data is located (“<a href="https://tidymodels.org/start/models/urchins.csv">https://tidymodels.org/start/models/urchins.csv</a>”):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">urchins <span style="color:#666">&lt;-</span>
+  <span style="color:#408080;font-style:italic"># Data were assembled for a tutorial </span>
+  <span style="color:#408080;font-style:italic"># at https://www.flutterbys.com.au/stats/tut/tut7.5a.html</span>
+  <span style="color:#00f">read_csv</span>(<span style="color:#ba2121">"https://tidymodels.org/start/models/urchins.csv"</span>) <span style="color:#666">%&gt;%</span> 
+  <span style="color:#408080;font-style:italic"># Change the names to be a little more verbose</span>
+  <span style="color:#00f">setNames</span>(<span style="color:#00f">c</span>(<span style="color:#ba2121">"food_regime"</span>, <span style="color:#ba2121">"initial_volume"</span>, <span style="color:#ba2121">"width"</span>)) <span style="color:#666">%&gt;%</span> 
+  <span style="color:#408080;font-style:italic"># Factors are very helpful for modeling, so we convert one column</span>
+  <span style="color:#00f">mutate</span>(food_regime <span style="color:#666">=</span> <span style="color:#00f">factor</span>(food_regime, levels <span style="color:#666">=</span> <span style="color:#00f">c</span>(<span style="color:#ba2121">"Initial"</span>, <span style="color:#ba2121">"Low"</span>, <span style="color:#ba2121">"High"</span>)))
+<span style="color:#408080;font-style:italic">#&gt; Parsed with column specification:</span>
+<span style="color:#408080;font-style:italic">#&gt; cols(</span>
+<span style="color:#408080;font-style:italic">#&gt;   TREAT = col_character(),</span>
+<span style="color:#408080;font-style:italic">#&gt;   IV = col_double(),</span>
+<span style="color:#408080;font-style:italic">#&gt;   SUTW = col_double()</span>
+<span style="color:#408080;font-style:italic">#&gt; )</span>
+</code></pre></div><p>Let’s take a quick look at the data:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">urchins
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 72 x 3</span>
+<span style="color:#408080;font-style:italic">#&gt;    food_regime initial_volume width</span>
+<span style="color:#408080;font-style:italic">#&gt;    &lt;fct&gt;                &lt;dbl&gt; &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt;  1 Initial                3.5 0.01 </span>
+<span style="color:#408080;font-style:italic">#&gt;  2 Initial                5   0.02 </span>
+<span style="color:#408080;font-style:italic">#&gt;  3 Initial                8   0.061</span>
+<span style="color:#408080;font-style:italic">#&gt;  4 Initial               10   0.051</span>
+<span style="color:#408080;font-style:italic">#&gt;  5 Initial               13   0.041</span>
+<span style="color:#408080;font-style:italic">#&gt;  6 Initial               13   0.061</span>
+<span style="color:#408080;font-style:italic">#&gt;  7 Initial               15   0.041</span>
+<span style="color:#408080;font-style:italic">#&gt;  8 Initial               15   0.071</span>
+<span style="color:#408080;font-style:italic">#&gt;  9 Initial               16   0.092</span>
+<span style="color:#408080;font-style:italic">#&gt; 10 Initial               17   0.051</span>
+<span style="color:#408080;font-style:italic">#&gt; # … with 62 more rows</span>
+</code></pre></div><p>The urchins data is a <a href="https://tibble.tidyverse.org/index.html">tibble</a>. If you are new to tibbles, the best place to start is the <a href="https://r4ds.had.co.nz/tibbles.html">tibbles chapter</a> in <em>R for Data Science</em>. For each of the 72 urchins, we know their:</p>
+<ul>
+<li>experimental feeding regime group (<code>food_regime</code>: either <code>Initial</code>, <code>Low</code>, or <code>High</code>),</li>
+<li>size in milliliters at the start of the experiment (<code>initial_volume</code>), and</li>
+<li>suture width at the end of the experiment (<code>width</code>).</li>
+</ul>
+<p>As a first step in modeling, it’s always a good idea to plot the data:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">ggplot</span>(urchins,
+       <span style="color:#00f">aes</span>(x <span style="color:#666">=</span> initial_volume, 
+           y <span style="color:#666">=</span> width, 
+           group <span style="color:#666">=</span> food_regime, 
+           col <span style="color:#666">=</span> food_regime)) <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_point</span>() <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_smooth</span>(method <span style="color:#666">=</span> lm, se <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">FALSE</span>) <span style="color:#666">+</span>
+  <span style="color:#00f">scale_color_viridis_d</span>(option <span style="color:#666">=</span> <span style="color:#ba2121">"plasma"</span>, end <span style="color:#666">=</span> <span style="color:#666">.7</span>)
+<span style="color:#408080;font-style:italic">#&gt; `geom_smooth()` using formula 'y ~ x'</span>
+</code></pre></div><p><img src="Get%20Started%20-%20Build%20a%20model_files/urchin-plot-1.svg" width="672"></p>
+<p>We can see that urchins that were larger in volume at the start of 
+the experiment tended to have wider sutures at the end, but the slopes 
+of the lines look different so this effect may depend on the feeding 
+regime condition.</p>
+<h2 id="build-model">Build and fit a model&nbsp;<a class="hanchor" arialabel="Anchor" href="#build-model">🔗︎</a> </h2>
+<p>A standard two-way analysis of variance (<a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc43.htm">ANOVA</a>)
+ model makes sense for this dataset because we have both a continuous 
+predictor and a categorical predictor. Since the slopes appear to be 
+different for at least two of the feeding regimes, let’s build a model 
+that allows for two-way interactions. Specifying an R formula with our 
+variables in this way:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">width <span style="color:#666">~</span> initial_volume <span style="color:#666">*</span> food_regime
+</code></pre></div><p>allows our regression model depending on initial volume to have separate slopes and intercepts for each food regime.</p>
+<p>For this kind of model, ordinary least squares is a good initial approach. With tidymodels, we start by specifying the <em>functional form</em> of the model that we want using the <a href="https://tidymodels.github.io/parsnip/">parsnip package</a>. Since there is a numeric outcome and the model should be linear with slopes and intercepts, the model type is <a href="https://tidymodels.github.io/parsnip/reference/linear_reg.html">“linear regression”</a>. We can declare this with:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">linear_reg</span>()
+<span style="color:#408080;font-style:italic">#&gt; Linear Regression Model Specification (regression)</span>
+</code></pre></div><p>That is pretty underwhelming since, on its own, it
+ doesn’t really do much. However, now that the type of model has been 
+specified, a method for <em>fitting</em> or training the model can be stated using the <strong>engine</strong>.
+ The engine value is often a mash-up of the software that can be used to
+ fit or train the model as well as the estimation method. For example, 
+to use ordinary least squares, we can set the engine to be <code>lm</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">linear_reg</span>() <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">set_engine</span>(<span style="color:#ba2121">"lm"</span>)
+<span style="color:#408080;font-style:italic">#&gt; Linear Regression Model Specification (regression)</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Computational engine: lm</span>
+</code></pre></div><p>The <a href="https://tidymodels.github.io/parsnip/reference/linear_reg.html">documentation page for <code>linear_reg()</code></a> lists the possible engines. We’ll save this model object as <code>lm_mod</code>.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">lm_mod <span style="color:#666">&lt;-</span> 
+  <span style="color:#00f">linear_reg</span>() <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">set_engine</span>(<span style="color:#ba2121">"lm"</span>)
+</code></pre></div><p>From here, the model can be estimated or trained using the <a href="https://tidymodels.github.io/parsnip/reference/fit.html"><code>fit()</code></a> function:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">lm_fit <span style="color:#666">&lt;-</span> 
+  lm_mod <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">fit</span>(width <span style="color:#666">~</span> initial_volume <span style="color:#666">*</span> food_regime, data <span style="color:#666">=</span> urchins)
+lm_fit
+<span style="color:#408080;font-style:italic">#&gt; parsnip model object</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Fit time:  2ms </span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Call:</span>
+<span style="color:#408080;font-style:italic">#&gt; stats::lm(formula = width ~ initial_volume * food_regime, data = data)</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Coefficients:</span>
+<span style="color:#408080;font-style:italic">#&gt;                    (Intercept)                  initial_volume  </span>
+<span style="color:#408080;font-style:italic">#&gt;                      0.0331216                       0.0015546  </span>
+<span style="color:#408080;font-style:italic">#&gt;                 food_regimeLow                 food_regimeHigh  </span>
+<span style="color:#408080;font-style:italic">#&gt;                      0.0197824                       0.0214111  </span>
+<span style="color:#408080;font-style:italic">#&gt;  initial_volume:food_regimeLow  initial_volume:food_regimeHigh  </span>
+<span style="color:#408080;font-style:italic">#&gt;                     -0.0012594                       0.0005254</span>
+</code></pre></div><p>Perhaps our analysis requires a description of the model parameter estimates and their statistical properties. Although the <code>summary()</code> function for <code>lm</code> objects can provide that, it gives the results back in an unwieldy format. Many models have a <code>tidy()</code>
+ method that provides the summary results in a more predictable and 
+useful format (e.g. a data frame with standard column names):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">tidy</span>(lm_fit)
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 6 x 5</span>
+<span style="color:#408080;font-style:italic">#&gt;   term                            estimate std.error statistic  p.value</span>
+<span style="color:#408080;font-style:italic">#&gt;   &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt; 1 (Intercept)                     0.0331    0.00962      3.44  0.00100 </span>
+<span style="color:#408080;font-style:italic">#&gt; 2 initial_volume                  0.00155   0.000398     3.91  0.000222</span>
+<span style="color:#408080;font-style:italic">#&gt; 3 food_regimeLow                  0.0198    0.0130       1.52  0.133   </span>
+<span style="color:#408080;font-style:italic">#&gt; 4 food_regimeHigh                 0.0214    0.0145       1.47  0.145   </span>
+<span style="color:#408080;font-style:italic">#&gt; 5 initial_volume:food_regimeLow  -0.00126   0.000510    -2.47  0.0162  </span>
+<span style="color:#408080;font-style:italic">#&gt; 6 initial_volume:food_regimeHigh  0.000525  0.000702     0.748 0.457</span>
+</code></pre></div><h2 id="predict-model">Use a model to predict&nbsp;<a class="hanchor" arialabel="Anchor" href="#predict-model">🔗︎</a> </h2>
+<p>This fitted object <code>lm_fit</code> has the <code>lm</code> model output built-in, which you can access with <code>lm_fit$fit</code>, but there are some benefits to using the fitted parsnip model object when it comes to predicting.</p>
+<p>Suppose that, for a publication, it would be particularly interesting
+ to make a plot of the mean body size for urchins that started the 
+experiment with an initial volume of 20ml. To create such a graph, we 
+start with some new example data that we will make predictions for, to 
+show in our graph:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">new_points <span style="color:#666">&lt;-</span> <span style="color:#00f">expand.grid</span>(initial_volume <span style="color:#666">=</span> <span style="color:#666">20</span>, 
+                          food_regime <span style="color:#666">=</span> <span style="color:#00f">c</span>(<span style="color:#ba2121">"Initial"</span>, <span style="color:#ba2121">"Low"</span>, <span style="color:#ba2121">"High"</span>))
+new_points
+<span style="color:#408080;font-style:italic">#&gt;   initial_volume food_regime</span>
+<span style="color:#408080;font-style:italic">#&gt; 1             20     Initial</span>
+<span style="color:#408080;font-style:italic">#&gt; 2             20         Low</span>
+<span style="color:#408080;font-style:italic">#&gt; 3             20        High</span>
+</code></pre></div><p>To get our predicted results, we can use the <code>predict()</code> function to find the mean values at 20ml.</p>
+<p>It is also important to communicate the variability, so we also need to find the predicted confidence intervals. If we had used <code>lm()</code> to fit the model directly, a few minutes of reading the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.lm.html">documentation page</a> for <code>predict.lm()</code> would explain how to do this. However, if we decide to use a different model to estimate urchin size (<em>spoiler:</em> we will!), it is likely that a completely different syntax would be required.</p>
+<p>Instead, with tidymodels, the types of predicted values are standardized so that we can use the same syntax to get these values.</p>
+<p>First, let’s generate the mean body width values:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">mean_pred <span style="color:#666">&lt;-</span> <span style="color:#00f">predict</span>(lm_fit, new_data <span style="color:#666">=</span> new_points)
+mean_pred
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 3 x 1</span>
+<span style="color:#408080;font-style:italic">#&gt;    .pred</span>
+<span style="color:#408080;font-style:italic">#&gt;    &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt; 1 0.0642</span>
+<span style="color:#408080;font-style:italic">#&gt; 2 0.0588</span>
+<span style="color:#408080;font-style:italic">#&gt; 3 0.0961</span>
+</code></pre></div><p>When making predictions, the tidymodels convention
+ is to always produce a tibble of results with standardized column 
+names. This makes it easy to combine the original data and the 
+predictions in a usable format:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">conf_int_pred <span style="color:#666">&lt;-</span> <span style="color:#00f">predict</span>(lm_fit, 
+                         new_data <span style="color:#666">=</span> new_points, 
+                         type <span style="color:#666">=</span> <span style="color:#ba2121">"conf_int"</span>)
+conf_int_pred
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 3 x 2</span>
+<span style="color:#408080;font-style:italic">#&gt;   .pred_lower .pred_upper</span>
+<span style="color:#408080;font-style:italic">#&gt;         &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt; 1      0.0555      0.0729</span>
+<span style="color:#408080;font-style:italic">#&gt; 2      0.0499      0.0678</span>
+<span style="color:#408080;font-style:italic">#&gt; 3      0.0870      0.105</span>
+
+<span style="color:#408080;font-style:italic"># Now combine: </span>
+plot_data <span style="color:#666">&lt;-</span> 
+  new_points <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">bind_cols</span>(mean_pred) <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">bind_cols</span>(conf_int_pred)
+
+<span style="color:#408080;font-style:italic"># and plot:</span>
+<span style="color:#00f">ggplot</span>(plot_data, <span style="color:#00f">aes</span>(x <span style="color:#666">=</span> food_regime)) <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_point</span>(<span style="color:#00f">aes</span>(y <span style="color:#666">=</span> .pred)) <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_errorbar</span>(<span style="color:#00f">aes</span>(ymin <span style="color:#666">=</span> .pred_lower, 
+                    ymax <span style="color:#666">=</span> .pred_upper),
+                width <span style="color:#666">=</span> <span style="color:#666">.2</span>) <span style="color:#666">+</span> 
+  <span style="color:#00f">labs</span>(y <span style="color:#666">=</span> <span style="color:#ba2121">"urchin size"</span>)
+</code></pre></div><p><img src="Get%20Started%20-%20Build%20a%20model_files/lm-all-pred-1.svg" width="672"></p>
+<h2 id="new-engine">Model with a different engine&nbsp;<a class="hanchor" arialabel="Anchor" href="#new-engine">🔗︎</a> </h2>
+<p>Every one on your team is happy with that plot <em>except</em> that one person who just read their first book on <a href="https://bayesian.org/what-is-bayesian-analysis/">Bayesian analysis</a>.
+ They are interested in knowing if the results would be different if the
+ model were estimated using a Bayesian approach. In such an analysis, a <a href="https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7"><em>prior distribution</em></a>
+ needs to be declared for each model parameter that represents the 
+possible values of the parameters (before being exposed to the observed 
+data). After some discussion, the group agrees that the priors should be
+ bell-shaped but, since no one has any idea what the range of values 
+should be, to take a conservative approach and make the priors <em>wide</em> using a Cauchy distribution (which is the same as a t-distribution with a single degree of freedom).</p>
+<p>The <a href="https://mc-stan.org/rstanarm/articles/priors.html">documentation</a> on the rstanarm package shows us that the <code>stan_glm()</code> function can be used to estimate this model, and that the function arguments that need to be specified are called <code>prior</code> and <code>prior_intercept</code>. It turns out that <code>linear_reg()</code> has a <a href="https://tidymodels.github.io/parsnip/reference/linear_reg.html#details"><code>stan</code> engine</a>. Since these prior distribution arguments are specific to the Stan software, they are passed as arguments to <a href="https://tidymodels.github.io/parsnip/reference/set_engine.html"><code>parsnip::set_engine()</code></a>. After that, the same exact <code>fit()</code> call is used:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#408080;font-style:italic"># set the prior distribution</span>
+prior_dist <span style="color:#666">&lt;-</span> rstanarm<span style="color:#666">::</span><span style="color:#00f">student_t</span>(df <span style="color:#666">=</span> <span style="color:#666">1</span>)
+
+<span style="color:#00f">set.seed</span>(<span style="color:#666">123</span>)
+
+<span style="color:#408080;font-style:italic"># make the parsnip model</span>
+bayes_mod <span style="color:#666">&lt;-</span>   
+  <span style="color:#00f">linear_reg</span>() <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">set_engine</span>(<span style="color:#ba2121">"stan"</span>, 
+             prior_intercept <span style="color:#666">=</span> prior_dist, 
+             prior <span style="color:#666">=</span> prior_dist) 
+
+<span style="color:#408080;font-style:italic"># train the model</span>
+bayes_fit <span style="color:#666">&lt;-</span> 
+  bayes_mod <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">fit</span>(width <span style="color:#666">~</span> initial_volume <span style="color:#666">*</span> food_regime, data <span style="color:#666">=</span> urchins)
+
+<span style="color:#00f">print</span>(bayes_fit, digits <span style="color:#666">=</span> <span style="color:#666">5</span>)
+<span style="color:#408080;font-style:italic">#&gt; parsnip model object</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Fit time:  1s </span>
+<span style="color:#408080;font-style:italic">#&gt; stan_glm</span>
+<span style="color:#408080;font-style:italic">#&gt;  family:       gaussian [identity]</span>
+<span style="color:#408080;font-style:italic">#&gt;  formula:      width ~ initial_volume * food_regime</span>
+<span style="color:#408080;font-style:italic">#&gt;  observations: 72</span>
+<span style="color:#408080;font-style:italic">#&gt;  predictors:   6</span>
+<span style="color:#408080;font-style:italic">#&gt; ------</span>
+<span style="color:#408080;font-style:italic">#&gt;                                Median   MAD_SD  </span>
+<span style="color:#408080;font-style:italic">#&gt; (Intercept)                     0.03452  0.00883</span>
+<span style="color:#408080;font-style:italic">#&gt; initial_volume                  0.00150  0.00037</span>
+<span style="color:#408080;font-style:italic">#&gt; food_regimeLow                  0.01805  0.01221</span>
+<span style="color:#408080;font-style:italic">#&gt; food_regimeHigh                 0.01934  0.01367</span>
+<span style="color:#408080;font-style:italic">#&gt; initial_volume:food_regimeLow  -0.00119  0.00047</span>
+<span style="color:#408080;font-style:italic">#&gt; initial_volume:food_regimeHigh  0.00061  0.00065</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; Auxiliary parameter(s):</span>
+<span style="color:#408080;font-style:italic">#&gt;       Median  MAD_SD </span>
+<span style="color:#408080;font-style:italic">#&gt; sigma 0.02121 0.00186</span>
+<span style="color:#408080;font-style:italic">#&gt; </span>
+<span style="color:#408080;font-style:italic">#&gt; ------</span>
+<span style="color:#408080;font-style:italic">#&gt; * For help interpreting the printed output see ?print.stanreg</span>
+<span style="color:#408080;font-style:italic">#&gt; * For info on the priors used see ?prior_summary.stanreg</span>
+</code></pre></div><p>This kind of Bayesian analysis (like many models) involves randomly generated numbers in its fitting procedure. We can use <code>set.seed()</code> to ensure that the same (pseudo-)random numbers are generated each time we run this code. The number <code>123</code> isn’t special or related to our data; it is just a “seed” used to choose random numbers.</p>
+<p>To update the parameter table, the <code>tidy()</code> method is once again used:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">tidy</span>(bayes_fit, conf.int <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">TRUE</span>)
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 6 x 5</span>
+<span style="color:#408080;font-style:italic">#&gt;   term                            estimate std.error  conf.low conf.high</span>
+<span style="color:#408080;font-style:italic">#&gt;   &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt; 1 (Intercept)                     0.0345    0.00883   0.0200    0.0490  </span>
+<span style="color:#408080;font-style:italic">#&gt; 2 initial_volume                  0.00150   0.000369  0.000895  0.00212 </span>
+<span style="color:#408080;font-style:italic">#&gt; 3 food_regimeLow                  0.0181    0.0122   -0.00181   0.0380  </span>
+<span style="color:#408080;font-style:italic">#&gt; 4 food_regimeHigh                 0.0193    0.0137   -0.00317   0.0420  </span>
+<span style="color:#408080;font-style:italic">#&gt; 5 initial_volume:food_regimeLow  -0.00119   0.000472 -0.00199  -0.000413</span>
+<span style="color:#408080;font-style:italic">#&gt; 6 initial_volume:food_regimeHigh  0.000610  0.000651 -0.000490  0.00170</span>
+</code></pre></div><p>A goal of the tidymodels packages is that the <strong>interfaces to common tasks are standardized</strong> (as seen in the <code>tidy()</code>
+ results above). The same is true for getting predictions; we can use 
+the same code even though the underlying packages use very different 
+syntax:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">bayes_plot_data <span style="color:#666">&lt;-</span> 
+  new_points <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">bind_cols</span>(<span style="color:#00f">predict</span>(bayes_fit, new_data <span style="color:#666">=</span> new_points)) <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">bind_cols</span>(<span style="color:#00f">predict</span>(bayes_fit, new_data <span style="color:#666">=</span> new_points, type <span style="color:#666">=</span> <span style="color:#ba2121">"conf_int"</span>))
+
+<span style="color:#00f">ggplot</span>(bayes_plot_data, <span style="color:#00f">aes</span>(x <span style="color:#666">=</span> food_regime)) <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_point</span>(<span style="color:#00f">aes</span>(y <span style="color:#666">=</span> .pred)) <span style="color:#666">+</span> 
+  <span style="color:#00f">geom_errorbar</span>(<span style="color:#00f">aes</span>(ymin <span style="color:#666">=</span> .pred_lower, ymax <span style="color:#666">=</span> .pred_upper), width <span style="color:#666">=</span> <span style="color:#666">.2</span>) <span style="color:#666">+</span> 
+  <span style="color:#00f">labs</span>(y <span style="color:#666">=</span> <span style="color:#ba2121">"urchin size"</span>) <span style="color:#666">+</span> 
+  <span style="color:#00f">ggtitle</span>(<span style="color:#ba2121">"Bayesian model with t(1) prior distribution"</span>)
+</code></pre></div><p><img src="Get%20Started%20-%20Build%20a%20model_files/stan-pred-1.svg" width="672"></p>
+<p>This isn’t very different from the non-Bayesian results (except in interpretation).</p>
+<div class="note">The <a href="https://parsnip.tidymodels.org/">parsnip</a> package can work with many model types, engines, and arguments. Check out <a href="https://www.tidymodels.org/find/parsnip/">tidymodels.org/find/parsnip</a> to see what is available.</div>
+<h2 id="why">Why does it work that way?&nbsp;<a class="hanchor" arialabel="Anchor" href="#why">🔗︎</a> </h2>
+<p>The extra step of defining the model using a function like <code>linear_reg()</code> might seem superfluous since a call to <code>lm()</code>
+ is much more succinct. However, the problem with standard modeling 
+functions is that they don’t separate what you want to do from the 
+execution. For example, the process of executing a formula has to happen
+ repeatedly across model calls even when the formula does not change; we
+ can’t recycle those computations.</p>
+<p>Also, using the tidymodels framework, we can do some interesting 
+things by incrementally creating a model (instead of using single 
+function call). <a href="https://www.tidymodels.org/start/tuning/">Model tuning</a>
+ with tidymodels uses the specification of the model to declare what 
+parts of the model should be tuned. That would be very difficult to do 
+if <code>linear_reg()</code> immediately fit the model.</p>
+<p>If you are familiar with the tidyverse, you may have noticed that our modeling code uses the magrittr pipe (<code>%&gt;%</code>). With dplyr and other tidyverse packages, the pipe works well because all of the functions take the <em>data</em> as the first argument. For example:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">urchins <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">group_by</span>(food_regime) <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">summarize</span>(med_vol <span style="color:#666">=</span> <span style="color:#00f">median</span>(initial_volume))
+<span style="color:#408080;font-style:italic">#&gt; `summarise()` ungrouping output (override with `.groups` argument)</span>
+<span style="color:#408080;font-style:italic">#&gt; # A tibble: 3 x 2</span>
+<span style="color:#408080;font-style:italic">#&gt;   food_regime med_vol</span>
+<span style="color:#408080;font-style:italic">#&gt;   &lt;fct&gt;         &lt;dbl&gt;</span>
+<span style="color:#408080;font-style:italic">#&gt; 1 Initial        20.5</span>
+<span style="color:#408080;font-style:italic">#&gt; 2 Low            19.2</span>
+<span style="color:#408080;font-style:italic">#&gt; 3 High           15</span>
+</code></pre></div><p>whereas the modeling code uses the pipe to pass around the <em>model object</em>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r">bayes_mod <span style="color:#666">%&gt;%</span> 
+  <span style="color:#00f">fit</span>(width <span style="color:#666">~</span> initial_volume <span style="color:#666">*</span> food_regime, data <span style="color:#666">=</span> urchins)
+</code></pre></div><p>This may seem jarring if you have used dplyr a lot, but it is extremely similar to how ggplot2 operates:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4" class="hasCopyButton"><button type="button" class="btn btn-primary btn-copy-ex" title="" aria-label="Copy to clipboard" data-toggle="tooltip" data-placement="left auto" data-trigger="hover" data-clipboard-copy="" data-original-title="Copy to clipboard"><i class="fa fa-copy"></i></button><code class="language-r" data-lang="r"><span style="color:#00f">ggplot</span>(urchins,
+       <span style="color:#00f">aes</span>(initial_volume, width)) <span style="color:#666">+</span>      <span style="color:#408080;font-style:italic"># returns a ggplot object </span>
+  <span style="color:#00f">geom_jitter</span>() <span style="color:#666">+</span>                         <span style="color:#408080;font-style:italic"># same</span>
+  <span style="color:#00f">geom_smooth</span>(method <span style="color:#666">=</span> lm, se <span style="color:#666">=</span> <span style="color:#008000;font-weight:bold">FALSE</span>) <span style="color:#666">+</span>  <span style="color:#408080;font-style:italic"># same                    </span>
+  <span style="color:#00f">labs</span>(x <span style="color:#666">=</span> <span style="color:#ba2121">"Volume"</span>, y <span style="color:#666">=</span> <span style="color:#ba2121">"Width"</span>)         <span style="color:#408080;font-style:italic"># etc</span>
+</code></pre></div><h2 id="session-info">Session information&nbsp;<a class="hanchor" arialabel="Anchor" href="#session-info">🔗︎</a> </h2>
+<pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
+#&gt;  setting  value                       
+#&gt;  version  R version 4.0.2 (2020-06-22)
+#&gt;  os       macOS Mojave 10.14.6        
+#&gt;  system   x86_64, darwin17.0          
+#&gt;  ui       X11                         
+#&gt;  language (EN)                        
+#&gt;  collate  en_US.UTF-8                 
+#&gt;  ctype    en_US.UTF-8                 
+#&gt;  tz       America/Denver              
+#&gt;  date     2020-07-22                  
+#&gt; 
+#&gt; ─ Packages ───────────────────────────────────────────────────────────────────
+#&gt;  package     * version date       lib source        
+#&gt;  broom       * 0.7.0   2020-07-09 [1] CRAN (R 4.0.0)
+#&gt;  broom.mixed * 0.2.6   2020-05-17 [1] CRAN (R 4.0.0)
+#&gt;  dials       * 0.0.8   2020-07-08 [1] CRAN (R 4.0.2)
+#&gt;  dplyr       * 1.0.0   2020-05-29 [1] CRAN (R 4.0.0)
+#&gt;  ggplot2     * 3.3.2   2020-06-19 [1] CRAN (R 4.0.0)
+#&gt;  infer       * 0.5.3   2020-07-14 [1] CRAN (R 4.0.0)
+#&gt;  parsnip     * 0.1.2   2020-07-03 [1] CRAN (R 4.0.1)
+#&gt;  purrr       * 0.3.4   2020-04-17 [1] CRAN (R 4.0.0)
+#&gt;  readr       * 1.3.1   2018-12-21 [1] CRAN (R 4.0.0)
+#&gt;  recipes     * 0.1.13  2020-06-23 [1] CRAN (R 4.0.0)
+#&gt;  rlang         0.4.7   2020-07-09 [1] CRAN (R 4.0.0)
+#&gt;  rsample     * 0.0.7   2020-06-04 [1] CRAN (R 4.0.0)
+#&gt;  rstanarm    * 2.19.3  2020-02-11 [1] CRAN (R 4.0.0)
+#&gt;  tibble      * 3.0.3   2020-07-10 [1] CRAN (R 4.0.2)
+#&gt;  tidymodels  * 0.1.1   2020-07-14 [1] CRAN (R 4.0.0)
+#&gt;  tune        * 0.1.1   2020-07-08 [1] CRAN (R 4.0.2)
+#&gt;  workflows   * 0.1.2   2020-07-07 [1] CRAN (R 4.0.2)
+#&gt;  yardstick   * 0.0.7   2020-07-13 [1] CRAN (R 4.0.0)
+#&gt; 
+#&gt; [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
+</code></pre>
+
+      </div>
+
+    <div class="article-footer">
+      
+      <div style="float:left">
+      
+      </div>
+      
+      
+      <div style="float:right">
+      
+      <div class="itemTitle" style="font-size:.8em; line-height:2em;" align="right">Next</div>
+        <a href="https://www.tidymodels.org/start/recipes/">Preprocess your data with recipes</a>
+      
+      
+      </div>
+     </div> 
+      
+
+      </div>
+
+    </div>
+  </div>  
+</div> 
+
+
+        <div id="rStudioFooter" class="band">
+          <div class="bandContent">
+            <div id="copyright">
+              
+              
+              Proudly supported by <a class="rstudioLogo" href="https://www.rstudio.com/"></a>
+              
+            </div>
+            <div id="logos">
+              
+              
+            </div>
+            
+            <span class="float-right" aria-hidden="true">
+              <a href="#" class="back-to-top">
+                <span class="button_icon">
+                  <i class="fas fa-chevron-up fa-2x"></i>
+                </span>
+              </a>
+            </span>
+            
+          </div>
+        </div>
+
+      </div>  
+    </div>  
+
+    
+
+    
+<script src="Get%20Started%20-%20Build%20a%20model_files/math-code.js"></script>
+<script type="text/x-mathjax-config;executed=true">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+</script>
+<script async="" src="Get%20Started%20-%20Build%20a%20model_files/MathJax.js"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-20375833-29', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  
+
+
+
+
+</body></html>
