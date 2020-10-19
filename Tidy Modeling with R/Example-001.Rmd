@@ -1,0 +1,57 @@
+---
+title: "Tidy Modeling with R: Example 1"
+output: html_notebook
+---
+
+Let’s use tidyverse functions to read in data that could be used in modeling. The data set comes from the city of Chicago’s data portal and contains daily ridership data for the city’s elevated train stations. The data set has columns for:
+
+    * the station identifier (numeric),
+    * the station name (character),
+    * the date (character in mm/dd/yyyy format),
+    * the day of the week (character), and
+    * the number of riders (numeric).
+
+Our tidyverse pipeline will conduct the following tasks, in order:
+
+1. We will use the tidyverse package readr to read the data from the source website and convert them into a tibble. To do this, the read_csv() function can determine the type of data by reading an initial number of rows. Alternatively, if the column names and types are already known, a column specification can be created in R and passed to read_csv().
+
+2. We filter the data to eliminate a few columns that are not needed (such as the station ID) and change the column stationname to station. The function select() is used for this. When filtering, use either the names of the column names or a dplyr selector function. When selecting names, a new variable name can be declared using the argument format new_name = old_name.
+
+3. The date field is converted to the R date format using the mdy() function from the lubridate package. We also convert the ridership numbers to thousands. Both of these computations are executed using the dplyr::mutate() function.
+
+4. There are a small number of days that have replicate ridership numbers at certain stations. To mitigate this issue, we use the maximum number of rides for each station and day combination. We group the ridership data by station and day, and then summarize within each of the 1999 unique combinations with the maximum statistic.
+
+The tidyverse code for these steps is:
+
+```{r}
+library(tidyverse)                      # We live in the tidyverse.
+library(lubridate)                      # For advanced date processing.
+
+################################################################################
+# We specify the location and data file name with an url.
+################################################################################
+
+url <- "http://bit.ly/raw-train-data-csv"
+
+
+all_stations <- 
+  read_csv( url ) %>%                   # Read the data and pass to ...
+    select(station = stationname,       # Filter columns and rename
+           date,                        # stationname to station ...
+           rides) %>% 
+    mutate( date = mdy(date),           # Convert the character date
+                                        # field to a date encoding ...
+            rides = rides / 1000) %>%   # Make steps per 1000's  and ...
+    group_by(date, station) %>%         # Group for summary ...
+    summarize(rides = max(rides),       # Determine max rides for each group
+              .groups = "drop") %>%     # Drop groups ...
+    ungroup()                           # Make sure
+
+  
+  all_stations                          # Verify solution
+```
+Note that when a tibble is printed the default output will be limited to 10 rows.
+
+
+This pipeline of operations illustrates why the tidyverse is popular. A series of data manipulations is used that have simple and easy to understand user interfaces; the series is bundled together in a streamlined and readable way. The focus is on how the user interacts with the software. This approach enables more people to learn R and achieve their analysis goals, and adopting these same principles for modeling in R has the same benefits.
+
