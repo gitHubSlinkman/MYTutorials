@@ -28,5 +28,7 @@ This is Craig Slinkman's implementation of the tutorial of how to use the tidyve
 ```{r load_packages}
 require( tidyverse )                    # I live in the tidyverse.
 require( tidymodels )                   # The object of this tutorial.
+require( broom )                        # Used to create tibble from objects.
+require( recipes )
 ```
 
