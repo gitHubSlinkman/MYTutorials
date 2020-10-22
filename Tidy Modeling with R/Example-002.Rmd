@@ -80,12 +80,6 @@ The units of the model coefficients might be more difficult to interpret, as wil
 
 Despite these drawbacks, the models used in this book utilize the log transformation for this outcome. From this point on, the outcome column is pre-logged in the ames data frame:
 
-```{r}
-ames <- 
-    ames %>% 
-        mutate(Sale_Price = log10(Sale_Price))
-
-```
 
 Another important aspect of these data for our modeling are their geographic locations. This spatial information is contained in the data in two ways: a qualitative Neighborhood label as well as quantitative longitude and latitude data. To visualize the spatial information, let’s use both together to plot the data on a map and color by neighborhood:
 
